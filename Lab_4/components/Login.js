@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
-import styles from '../../Styles';
+import styles from '../Styles';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
     } else {
       setError('');
       await AsyncStorage.setItem('currentUser', email);
-      navigation.navigate('Profile', { email });
+      navigation.navigate('Dashboard');
     }
   };
 
@@ -51,7 +51,7 @@ export default function Login({ navigation }) {
             }}
           />
           <MaterialIcons
-            name={showPassword ? "visibility" : "visibility-off"}
+            name={showPassword ? 'visibility' : 'visibility-off'}
             size={24}
             onPress={() => setShowPassword(!showPassword)}
             style={styles.icon}

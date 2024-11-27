@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
-import styles from '../../Styles';
+import styles from '../Styles';
 
 export default function Recover({ navigation }) {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [stage, setStage] = useState('recover'); // 'recover' or 'reset'
+  const [stage, setStage] = useState('recover');
   const [error, setError] = useState('');
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -21,7 +21,7 @@ export default function Recover({ navigation }) {
       setError("Email doesn't exist.");
     } else {
       setError('');
-      setStage('reset'); // Switch to reset stage
+      setStage('reset');
     }
   };
 
@@ -36,7 +36,7 @@ export default function Recover({ navigation }) {
         users[email].password = newPassword;
         await AsyncStorage.setItem('users', JSON.stringify(users));
         Alert.alert("Reset Successfully", "Your password has been updated.");
-        navigation.navigate('Login'); // Navigate to login after reset
+        navigation.navigate('Login');
       } else {
         setError("User not found.");
       }
